@@ -6,7 +6,7 @@
 #    By: ysay <ysay@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/10 15:44:43 by ysay              #+#    #+#              #
-#    Updated: 2022/10/02 15:20:34 by ysay             ###   ########.fr        #
+#    Updated: 2022/10/02 17:10:36 by ysay             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ $(ODIR)%.o : $(SDIR)%.c
 
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(NAME3)_*
 fclean: clean
 	rm -rf $(NAME)
 re: fclean all
