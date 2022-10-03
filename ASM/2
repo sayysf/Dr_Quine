@@ -1,0 +1,34 @@
+.data
+string:
+ .asciz "hello world\n"
+ .global main
+ .text
+func:
+ ret
+main:
+ push %rbp
+ mov %rbp, %rsp
+ call func
+ mov $string, %rdi
+ xor %rax, %rax              # because printf is varargs
+ call printf
+ xor %rax, %rax              # rax will hold the current number
+ xor %rbx, %rbx              # rbx will hold the next number
+ inc %rbx                    # rbx is originally 1
+ pop %ebp
+ ret
+print:
+        # We need to call printf, but we are using eax, ebx, and ecx.  printf
+        # may destroy eax and ecx so we will save these before the call and
+        # restore them afterwards.
+
+        push    %rax                    # caller-save register
+        push    %rcx                    # caller-save register
+
+        mov     %rax, %rsi              # set 2nd parameter (current_number)
+
+        # Stack is already aligned because we pushed three 8 byte registers
+
+        pop     %rbx                    # restore rbx before returning
+        ret
+
