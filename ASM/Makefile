@@ -15,8 +15,8 @@ NAME1= Colleen
 NAME2= Grace
 NAME3= Sully
 
-_SRC= $(patsubst %,%.c,$(NAME))
-_OBJ= $(_SRC:.c=.o)
+_SRC= $(patsubst %,%.s,$(NAME))
+_OBJ= $(_SRC:.s=.o)
 
 SDIR=
 ODIR=
@@ -26,7 +26,7 @@ SRC= $(patsubst %,$(SDIR)%,$(_SRC))
 OBJ= $(patsubst %,$(ODIR)%,$(_OBJ))
 INC= $(patsubst %,$(IFLAG)%,$(_IDIR))
 
-CC= gcc
+CC= clang
 
 FLAGS= -Wall -Wextra -Werror
 
@@ -41,7 +41,7 @@ $(ODIR)%.o : $(SDIR)%.c
 
 
 clean:
-	rm -rf $(OBJ) $(NAME3)_* $(NAME2)_kid.c
+	rm -rf $(OBJ) $(NAME3)_* $(NAME2)_kid.s
 fclean: clean
 	rm -rf $(NAME)
 re: fclean all
