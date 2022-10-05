@@ -1,23 +1,3 @@
-.macro M
- main:
-.endm
-.macro set
- name: .asciz "Grace_kid.s"
- code: .asciz ".macro M%c main:%c.endm%c.macro set%c name: .asciz %cGrace_kid.s%c%c code: .asciz %c%s%c%c.endm%c.macro source%cM%c mov $2, %rax; mov $name, %rdi; mov $578, %rsi; mov $511, %rdx; syscall; push %rax%c mov %rax, %rdi; xor %rax, %rax; mov $code, %rsi; mov $0xa, %rdx; mov $0xa, %rcx; mov $0xa, %r8; mov $0xa, %r9%c mov $0, %rbx; mov $17, %r10%cloop: inc %rbx%c push $0xa; cmp %rbx, %r10; jne loop%c push $0xa; push $0x22; push $code; push $0x22; push $0xa; push $0x22; push $0x22%ccall dprintf; add $0x88, %rsp; add $0x38, %rsp; pop %rax; mov %rax, %rdi; mov $3, %rdi; syscall%c.endm%c.global main%c.data%c set%c.text%c source%c ret%c"
-.endm
-.macro source
-M
- mov $2, %rax; mov $name, %rdi; mov $578, %rsi; mov $511, %rdx; syscall; push %rax
- mov %rax, %rdi; xor %rax, %rax; mov $code, %rsi; mov $0xa, %rdx; mov $0xa, %rcx; mov $0xa, %r8; mov $0xa, %r9
- mov $0, %rbx; mov $17, %r10
-loop: inc %rbx
- push $0xa; cmp %rbx, %r10; jne loop
- push $0xa; push $0x22; push $code; push $0x22; push $0xa; push $0x22; push $0x22
-call dprintf; add $0x88, %rsp; add $0x38, %rsp; pop %rax; mov %rax, %rdi; mov $3, %rdi; syscall
-.endm
-.global main
-.data
- set
-.text
- source
- ret
+  xor %rdx, %rdx; mov $i, %r8; movw (%r8), %dx; mov $0x0, %rdi; cmp %rdi, %rdx; jne ok;  ret;
+  ok:
+  push %rbp; mov %rsp, %rbp; sub $0x200, %rsp; lea -0x40(%rbp), %rdi; mov $name, %rsi; xor %rdx, %rdx; mov $i, %r8 ; movw (%r8), %dx; dec %rdx; call sprintf;  lea -0x40(%rbp), %rdi; mov $2, %rax; mov $578, %rsi; mov $511, %rdx; syscall; push %rax; lea -0x200(%rbp), %rdi; mov $arg, %rsi; mov $232, %rdx; call memcpy; xor %rdx, %rdx; mov $i, %r8 ; movw (%r8), %dx; dec %rdx; mov %rdx, 32(%rdi); call memcpy; pop %rdi; xor %rax, %rax; lea -0x200(%rbp), %rsi; mov $0xa, %rdx; mov $0xa, %rcx; mov $0xa, %r8; mov $0xa, %r9; mov $str, %rsi; call dprintf; mov $3, %rax; syscall; lea -0x80(%rbp), %rdi; mov $cc, %rsi; xor %rdx, %rdx; mov $i, %r8; movw (%r8), %dx; dec %rdx; mov %rdx, %rcx; mov %rdx, %r8; call sprintf; lea -0x80(%rbp), %rdi; call system; add $0x200, %rsp; pop %rbp; ret;
